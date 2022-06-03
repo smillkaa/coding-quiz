@@ -1,0 +1,40 @@
+body{
+    display: flex;
+    justify-content: center;
+    background-image: url(./assets/images/bg-img.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+    color: white;
+}
+
+#startContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -ms-flex-align: center;
+    position: relative;
+    border: 5px solid white;
+    padding: 30px;
+    margin: 30px;
+    text-align: center;
+    font-size: 2vw;
+    font-family: 'Changa', sans-serif;
+}
+
+.start{
+    padding: 6px 0px;
+    font-family: 'Changa', sans-serif;
+    font-weight: bolder;
+    font-size: 3vw;
+    width: 400px;
+}
+
+h1{
+    margin-bottom: 0;
+}
+p{
+    margin-top: 0;
+}
