@@ -22,19 +22,19 @@ var quizQuestions = [
     }
 ]
 
-// timer
-var time = 60
-function setTimer(){
-    setInterval(function() {
-        var timer = document.getElementById("time-display")
-        if (time > 0 && i <  quizQuestions.length){
-            time = time - 1
-            timer.textContent = "Time Left: " + time
-        }//else {
-    //endQuiz()
-    //}
-    }, 1000)
-}
+// // timer
+// var time = 60
+// function setTimer(){
+//     setInterval(function() {
+//         var timer = document.getElementById("time-display")
+//         if (time > 0 && i <  quizQuestions.length){
+//             time = time - 1
+//             timer.textContent = "Time Left: " + time
+//         }//else {
+//     //endQuiz()
+//     //}
+//     }, 1000)
+// }
 
 // function checkAnswer() {
 //     // if correct answer, nothing happens, if answer is incorrect remove 10 seconds
@@ -42,6 +42,7 @@ function setTimer(){
 //         time - 10
 //     }
 // }
+
 // Set html document variables
 var startBtn = document.getElementById("start")
 var home = document.getElementById("home")
@@ -60,34 +61,22 @@ function startQuiz(){
 
 
 function displayQuestion(){
-    questionText.textContent = quizQuestions[0].question
+    questionText.textContent = quizQuestions[counter].question
     for(var i = 0; i < quizQuestions.length; i++){
         var answerOption = document.createElement("li")
         var answerButton = document.createElement("button")
         answerOption.classList.add("option")
         answerButton.classList.add("option-button")
-        answerButton.textContent = quizQuestions[0].choices[i]
+        answerButton.textContent = quizQuestions[counter].choices[i]
         answerOption.appendChild(answerButton)
         optionList.appendChild(answerOption)
-        // answerButton.addEventListener("click", checkAnswer)
         answerButton.addEventListener("click", displayQuestionTwo)
     }
-}
 
 function displayQuestionTwo(){
-    questionText.textContent = quizQuestions[1].question
-    for(var j = 0; j < quizQuestions.length; j++){
-        answerButton.textContent = quizQuestions[1].choices[j]
-        answerOption.appendChild(answerButton)
-        optionList.appendChild(answerOption)
-        // answerButton.addEventListener("click", checkAnswer)
-        answerButton.addEventListener("click", displayQuestionTwo)
+    counter++
+    questionText.textContent = quizQuestions[counter].question
+
     }
-}
-
-
-
-
-
-
+} // end of displayQuestion
 startBtn.addEventListener("click", startQuiz)
