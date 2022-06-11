@@ -22,61 +22,82 @@ var quizQuestions = [
     }
 ]
 
-// // timer
-// var time = 60
-// function setTimer(){
-//     setInterval(function() {
-//         var timer = document.getElementById("time-display")
-//         if (time > 0 && i <  quizQuestions.length){
-//             time = time - 1
-//             timer.textContent = "Time Left: " + time
-//         }//else {
-//     //endQuiz()
-//     //}
-//     }, 1000)
-// }
+// timer
+var time = 60
+var timer = document.getElementById("time-display")
+var timerInterval
+function setTimer(){
+    timerInterval = setInterval(function() {
+        if (time > 0) {
+            time--
+            timer.textContent = "Time Left: " + time
+        } else {
+            endQuiz()
+        }
+    }, 1000)
+}
 
-// function checkAnswer() {
-//     // if correct answer, nothing happens, if answer is incorrect remove 10 seconds
-//     if (click on answerButton.textContent !== quizQuestions.answer){
-//         time - 10
-//     }
-// }
+
 
 // Set html document variables
 var startBtn = document.getElementById("start")
 var home = document.getElementById("home")
 var questionText = document.getElementById("question")
 var optionList = document.getElementById("option-list")
+var quizContainer = document.getElementById("quiz-container")
+var startContainer = document.getElementById("start-container")
 var counter = 0
 
 // start function, remove home, display first question
 function startQuiz(){
-    var quizContainer = document.getElementById("quiz-container")
+    timer.textContent = "Time Left: " + time
+    setTimer()
     quizContainer.style.display = "flex"
-    var startContainer = document.getElementById("start-container")
     startContainer.style.display = "none"
     displayQuestion()
-} // end of startQuiz function
+}
 
-
+// // loop through displaying questions
 function displayQuestion(){
-    questionText.textContent = quizQuestions[counter].question
-    for(var i = 0; i < quizQuestions.length; i++){
-        var answerOption = document.createElement("li")
-        var answerButton = document.createElement("button")
-        answerOption.classList.add("option")
-        answerButton.classList.add("option-button")
-        answerButton.textContent = quizQuestions[counter].choices[i]
-        answerOption.appendChild(answerButton)
-        optionList.appendChild(answerOption)
-        answerButton.addEventListener("click", displayQuestionTwo)
-    }
+    if (counter < quizQuestions.length) {
+        optionList.innerHTML = ""
+        questionText.textContent = quizQuestions[counter].question
+        for(var i = 0; i < quizQuestions.length; i++){
+            var answerOption = document.createElement("li")
+            var answerButton = document.createElement("button")
+            answerOption.classList.add("option")
+            answerButton.classList.add("option-button")
+            answerButton.textContent = quizQuestions[counter].choices[i]
+            answerOption.appendChild(answerButton)
+            optionList.appendChild(answerOption)
+            answerButton.addEventListener("click", displayNextQuestion) //
+        }
+    } else endQuiz ()
+}
 
-function displayQuestionTwo(){
+// if answer is incorrect, removes time
+function displayNextQuestion(event){
+    if (event.target.textContent !== quizQuestions[counter].answer) {
+        time-= 10
+    }
     counter++
-    questionText.textContent = quizQuestions[counter].question
+    displayQuestion()
+}
 
-    }
-} // end of displayQuestion
+// end of game 
+function endQuiz() {
+    questionText.innerHTML = "GAME OVER"
+    optionList.remove()
+    var enterName = document.createElement("div")
+    enterName.innerHTML = "Enter your name to save your score:"
+    quizContainer.appendChild(enterName)
+    var nameInput = document.createElement("input")
+    enterName.appendChild(nameInput)
+    var submitBtn = document.createElement("button")
+    submitBtn.innerHTML = "SUBMIT"
+    submitBtn.classList.add("button")
+    enterName.appendChild(submitBtn)
+
+    clearInterval(timerInterval)
+}
 startBtn.addEventListener("click", startQuiz)

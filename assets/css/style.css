@@ -25,12 +25,12 @@ main{
     padding: 30px;
     margin: 30px;
 }
-#quiz-container{
+.hidden{
     display: none;
     text-align: left;
 }
 
-.start{
+.button{
     padding: 6px 0px;
     font-family: 'Changa', sans-serif;
     font-weight: bolder;
