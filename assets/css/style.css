@@ -48,3 +48,10 @@ p{
 footer{
     margin-top: 500px;
 }
+
+/* endQuiz styles */
+.end-quiz{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

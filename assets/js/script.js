@@ -96,8 +96,22 @@ function endQuiz() {
     var submitBtn = document.createElement("button")
     submitBtn.innerHTML = "SUBMIT"
     submitBtn.classList.add("button")
+    submitBtn.setAttribute("id", "submit")
     enterName.appendChild(submitBtn)
 
     clearInterval(timerInterval)
+    timer.remove()
+
+    // local storage
+    $("#submit").on("click", function(event) {
+        event.preventDefault()
+        // get user name and score
+        var name = $(nameInput).val()
+        var score = time
+
+        localStorage.setItem(score, name)
+        nameInput.value = ''
+    })
 }
 startBtn.addEventListener("click", startQuiz)
+
