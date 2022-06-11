@@ -112,6 +112,12 @@ function endQuiz() {
         localStorage.setItem(score, name)
         nameInput.value = ''
     })
+    
+    //get items from local storage store in .modal-body
+    
 }
 startBtn.addEventListener("click", startQuiz)
-
+// modal to view scores
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
