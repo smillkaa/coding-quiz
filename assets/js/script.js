@@ -57,7 +57,7 @@ function startQuiz(){
     displayQuestion()
 }
 
-// // loop through displaying questions
+// // loop displaying questions
 function displayQuestion(){
     if (counter < quizQuestions.length) {
         optionList.innerHTML = ""
@@ -84,36 +84,44 @@ function displayNextQuestion(event){
     displayQuestion()
 }
 
-// end of game 
+// end of game screen
 function endQuiz() {
     questionText.innerHTML = "GAME OVER"
     optionList.remove()
     var enterName = document.createElement("div")
-    enterName.innerHTML = "Enter your name to save your score:"
+    enterName.classList.add("end-quiz")
+    enterName.innerHTML = "<p>Enter your name to save your score:</p>"
+    enterName.classList.add("end-quiz")
     quizContainer.appendChild(enterName)
     var nameInput = document.createElement("input")
     enterName.appendChild(nameInput)
     var submitBtn = document.createElement("button")
     submitBtn.innerHTML = "SUBMIT"
-    submitBtn.classList.add("button")
+    submitBtn.classList.add("end-button")
     submitBtn.setAttribute("id", "submit")
     enterName.appendChild(submitBtn)
 
     clearInterval(timerInterval)
     timer.remove()
 
+    
     // local storage
     $("#submit").on("click", function(event) {
         event.preventDefault()
-        // get user name and score
         var name = $(nameInput).val()
         var score = time
+        var scoreName = score + " " + name
+        var scoreDisplay = $(".modal-body")
+        submitBtn.classList.add("end-button:after")
 
-        localStorage.setItem(score, name)
+        localStorage.setItem(name, score)
         nameInput.value = ''
+
+        // testing below
+       var highScores = JSON.parse(localStorage.getItem(name))
+       console.log(highScores)
     })
     
-    //get items from local storage store in .modal-body
     
 }
 startBtn.addEventListener("click", startQuiz)
