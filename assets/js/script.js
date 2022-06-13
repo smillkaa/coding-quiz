@@ -70,7 +70,7 @@ function displayQuestion(){
             answerButton.textContent = quizQuestions[counter].choices[i]
             answerOption.appendChild(answerButton)
             optionList.appendChild(answerOption)
-            answerButton.addEventListener("click", displayNextQuestion) //
+            answerButton.addEventListener("click", displayNextQuestion)
         }
     } else endQuiz ()
 }
@@ -86,45 +86,72 @@ function displayNextQuestion(event){
 
 // end of game screen
 function endQuiz() {
-    questionText.innerHTML = "GAME OVER"
     optionList.remove()
-    var enterName = document.createElement("div")
-    enterName.classList.add("end-quiz")
-    enterName.innerHTML = "<p>Enter your name to save your score:</p>"
-    enterName.classList.add("end-quiz")
-    quizContainer.appendChild(enterName)
+    if (time == 0){
+        questionText.textContent = "GAME OVER"
+    }
+    else {
+        questionText.textContent = "QUIZ COMPLETED"
+    }
+
+    // create form to submit name to save score
+    var enterNameForm = document.createElement("form")
+    enterNameForm.innerHTML = "<h3>Enter your name to save your score:</h3>"
+    enterNameForm.classList.add("end-quiz")
+    quizContainer.appendChild(enterNameForm)
+
+    var errorEl = document.createElement("p")
+    errorEl.textContent = "Please enter your name"
+    errorEl.classList.add("hidden")
+    enterNameForm.appendChild(errorEl)
+
     var nameInput = document.createElement("input")
-    enterName.appendChild(nameInput)
+    nameInput.setAttribute("id","input")
+    enterNameForm.appendChild(nameInput)
+
     var submitBtn = document.createElement("button")
     submitBtn.innerHTML = "SUBMIT"
     submitBtn.classList.add("end-button")
     submitBtn.setAttribute("id", "submit")
-    enterName.appendChild(submitBtn)
+    enterNameForm.appendChild(submitBtn)
 
     clearInterval(timerInterval)
     timer.remove()
 
-    
     // local storage
     $("#submit").on("click", function(event) {
         event.preventDefault()
-        var name = $(nameInput).val()
-        var score = time
-        var scoreName = score + " " + name
-        var scoreDisplay = $(".modal-body")
-        submitBtn.classList.add("end-button:after")
 
-        localStorage.setItem(name, score)
-        nameInput.value = ''
+        // if submits empty form, show error
+        enterNameForm = document.getElementById("input").value
+        if (enterNameForm == ""){
+            errorEl.classList.remove("hidden")
+            errorEl.classList.add("error")
 
-        // testing below
-       var highScores = JSON.parse(localStorage.getItem(name))
-       console.log(highScores)
+        }
+        else{
+            errorEl.remove()
+            var name = $(nameInput).val()
+            var score = time
+            var scoreName = score + " " + name
+            var scoreDisplay = $(".modal-body")
+    
+            localStorage.setItem(name, score)
+            nameInput.value = ''
+    
+            // testing below
+           var highScores = JSON.parse(localStorage.getItem(name))
+           console.log(highScores)
+        }
+        
+        
     })
     
     
 }
+
 startBtn.addEventListener("click", startQuiz)
+
 // modal to view scores
 $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')

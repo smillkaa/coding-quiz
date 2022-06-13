@@ -64,7 +64,7 @@ body{
 .option-button{
     text-align: left;
     color: white;
-    font-size: 1.3vw;
+    font-size: 1.1rem;
     font-family:'Tajawal', sans-serif;
     background-color: rgba(0,0,0, 60%);
     border: none;
@@ -74,12 +74,18 @@ body{
     box-shadow: 0 0 10px rgb(47, 0, 255);
     cursor: pointer;
 }
-
+.wrong-choice::after{
+    box-shadow: 0 0 10px rgb(255, 0, 0);
+}
 h1{
     margin-bottom: 0;
 }
 p{
     margin-top: 0;
+}
+h3 {
+    font-size: 1.4rem;
+    margin: 40px 0;
 }
 header{
     margin-bottom: 70px;
@@ -94,6 +100,7 @@ footer{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .end-button {
     background-color: rgba(0,0,255, 60%);
@@ -106,6 +113,14 @@ footer{
     transition: 00.3s;
 }
 
+.error{
+    color: rgb(187, 0, 0);
+    background-color: rgb(0, 0, 0, 80%);
+    font-family:'Tajawal', sans-serif;
+    font-size: 20px;
+    margin-top: -30px;
+    padding: 0 10px;
+}
 /* modal styles */
 .modal-title, .modal-body {
     color: rebeccapurple;
