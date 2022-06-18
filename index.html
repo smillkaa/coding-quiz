@@ -35,7 +35,7 @@
     </div>
     </div>
     <!-- view scores button trigger modal -->
-    <button type="button" class="btn btn-primary scores-btn" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-primary scores-btn hidden" id="scores-btn" data-toggle="modal" data-target="#exampleModal">
         View Scores
     </button>
 
@@ -46,7 +46,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Player Scores</h5>
                 </div>
-                <div class="modal-body"></div>
+                <div class="modal-body" id="modal-body"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>

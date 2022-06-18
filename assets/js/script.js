@@ -47,6 +47,7 @@ var optionList = document.getElementById("option-list")
 var quizContainer = document.getElementById("quiz-container")
 var startContainer = document.getElementById("start-container")
 var counter = 0
+var scoresList = JSON.parse(localStorage.getItem("scoresList")) || []
 
 // start function, remove home, display first question
 function startQuiz(){
@@ -75,10 +76,15 @@ function displayQuestion(){
     } else endQuiz ()
 }
 
-// if answer is incorrect, removes time
+// if answer is incorrect, removes time, turns time red
 function displayNextQuestion(event){
     if (event.target.textContent !== quizQuestions[counter].answer) {
         time-= 10
+        timer.animate([
+            {color: "white"},
+            {color: "red"},
+            {color: "white"}
+        ], 700)
     }
     counter++
     displayQuestion()
@@ -95,10 +101,12 @@ function endQuiz() {
     }
 
     // create form to submit name to save score
+    var formDiv = document.createElement("div")
     var enterNameForm = document.createElement("form")
     enterNameForm.innerHTML = "<h3>Enter your name to save your score:</h3>"
     enterNameForm.classList.add("end-quiz")
-    quizContainer.appendChild(enterNameForm)
+    formDiv.appendChild(enterNameForm)
+    quizContainer.appendChild(formDiv)
 
     var errorEl = document.createElement("p")
     errorEl.textContent = "Please enter your name"
@@ -129,19 +137,33 @@ function endQuiz() {
             errorEl.classList.add("error")
 
         }
+        // when submits name, remove elements and display 'score saved' message
         else{
-            errorEl.remove()
+            formDiv.remove()
+            questionText.textContent = "SCORE SAVED!"
+            var scoresBtn = document.getElementById("scores-btn")
+            scoresBtn.classList.remove("hidden")
             var name = $(nameInput).val()
             var score = time
-            var scoreName = score + " " + name
-            var scoreDisplay = $(".modal-body")
-    
-            localStorage.setItem(name, score)
+            var scoreDisplay = document.getElementById("modal-body")
+            var orderedList = document.createElement("ol")
+            scoreDisplay.appendChild(orderedList)
+            var scoreInfo = {
+                name: name,
+                score: score
+            }
+            scoresList.push(scoreInfo)
+            localStorage.setItem("scoresList", JSON.stringify(scoresList)) 
             nameInput.value = ''
-    
-            // testing below
-           var highScores = JSON.parse(localStorage.getItem(name))
-           console.log(highScores)
+            
+            // display scores in modal
+            for (let i = 0; i < scoresList.length; i++ ) {
+                var listEl = document.createElement("li")
+                listEl.textContent = `${scoresList[i].name}: ${scoresList[i].score}`
+                listEl.classList.add("highscore-li-style")
+                orderedList.appendChild(listEl)
+
+            }
         }
         
         

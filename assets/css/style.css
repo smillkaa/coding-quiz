@@ -1,4 +1,4 @@
-body{
+body {
     background-image: url("../images/bg-img.jpg");
     background-size: cover;
     background-position: center;
@@ -9,7 +9,7 @@ body{
     font-size: 2vw;
     font-family: 'Changa', sans-serif;
 }
-.container{
+.container {
     display: flex;
     flex-direction: column;
     width: 500px;
@@ -20,17 +20,16 @@ body{
     padding: 30px;
     margin: 30px;
 }
-.container-center{
+.container-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.hidden{
+.hidden {
     display: none;
     text-align: left;
 }
-
-.button{
+.button {
     padding: 6px 0px;
     font-family: 'Changa', sans-serif;
     font-weight: bolder;
@@ -40,11 +39,11 @@ body{
     border: none;
     transition: 0.3s;
 }
-.btn-text:hover{
+.btn-text:hover {
     transform: scaleX(1.20);
     color: rgb(255, 255, 255);
 }
-.button:hover{
+.button:hover {
     transform: scaleX(0.80);
     outline: none;
     border-color: white;
@@ -57,11 +56,11 @@ body{
     border: rgb(0, 102, 255) solid 1px;
     transition: 00.3s;
 }
-.scores-btn:hover, .end-button:hover{
+.scores-btn:hover, .end-button:hover {
     background-color: rgb(0, 3, 55);
     box-shadow: 0 0 60px rgb(47, 0, 255);
 }
-.option-button{
+.option-button {
     text-align: left;
     color: white;
     font-size: 1.1rem;
@@ -74,28 +73,28 @@ body{
     box-shadow: 0 0 10px rgb(47, 0, 255);
     cursor: pointer;
 }
-.wrong-choice::after{
+.wrong-choice::after {
     box-shadow: 0 0 10px rgb(255, 0, 0);
 }
-h1{
+h1 {
     margin-bottom: 0;
 }
-p{
+p {
     margin-top: 0;
 }
 h3 {
     font-size: 1.4rem;
     margin: 40px 0;
 }
-header{
+header {
     margin-bottom: 70px;
 }
-footer{
+footer {
     margin-top: 70px;
 }
 
 /* endQuiz styles */
-.end-quiz{
+.end-quiz {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,7 +112,7 @@ footer{
     transition: 00.3s;
 }
 
-.error{
+.error {
     color: rgb(187, 0, 0);
     background-color: rgb(0, 0, 0, 80%);
     font-family:'Tajawal', sans-serif;
@@ -121,10 +120,13 @@ footer{
     margin-top: -30px;
     padding: 0 10px;
 }
+
 /* modal styles */
 .modal-title, .modal-body {
-    color: rebeccapurple;
+    color: rgb(0, 31, 110);
 }
 .highscore-li-style {
-    color: green;
+    color: rgb(0, 0, 0);
+    font-family:'Tajawal', sans-serif;
+    text-align: left;
 }
